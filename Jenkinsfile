@@ -8,9 +8,26 @@ pipeline {
     }
 
     stages {
+        
+
         stage('Checkout') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/Hussain147/tf-ansible-task.git/']]]) 
+            }
+        }
+        
+        stage('Check Instances') {
+            steps {
+                script {
+                    // Use AWS CLI to check if instances exist
+                    def instanceCount = sh(script: "aws ec2 describe-instances --query 'Reservations[*].Instances[*].InstanceId' --output text | wc -w", returnStatus: true).trim()
+
+                    if (instanceCount.toInteger() > 0) {
+                        echo "Instances already exist. Skipping creation."
+                        currentBuild.result = 'SUCCESS'
+                        return
+                    }
+                }
             }
         }
 
