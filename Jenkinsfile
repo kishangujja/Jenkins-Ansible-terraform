@@ -16,21 +16,6 @@ pipeline {
             }
         }
         
-        stage('Check Instances') {
-            steps {
-                script {
-                    // Use AWS CLI to check if instances exist
-                    def instanceCount = sh(script: "aws ec2 describe-instances --query 'Reservations[*].Instances[*].InstanceId' --output text | wc -w", returnStatus: true).trim()
-
-                    if (instanceCount.toInteger() > 0) {
-                        echo "Instances already exist. Skipping creation."
-                        currentBuild.result = 'SUCCESS'
-                        return
-                    }
-                }
-            }
-        }
-
         stage('Terraform Apply') {
             steps {
                 script {
