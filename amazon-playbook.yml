@@ -2,6 +2,9 @@
 - hosts: frontend
   become: true
   tasks:
+    - name: Install Python 2
+      raw: sudo amazon-linux-extras install python2 -y
+
     - name: Disable SELinux
       selinux:
         state: disabled
