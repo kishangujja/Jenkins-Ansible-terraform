@@ -3,8 +3,8 @@ pipeline {
 
     environment {
         AWS_REGION = 'us-east-1'
-        AMAZON_KEY_PAIR = 'linux'
-        UBUNTU_KEY_PAIR = 'ubuntu-key'
+        AMAZON_KEY_PAIR = 'devops'
+        UBUNTU_KEY_PAIR = 'devops'
     }
 
     stages {
@@ -12,7 +12,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/Hussain147/tf-ansible-task.git/']]]) 
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/kishangujja/Jenkins-Ansible-terraform.git/']]]) 
             }
         }
         
