@@ -43,13 +43,13 @@ pipeline {
                     ansiblePlaybook(
                         playbook: 'amazon-playbook.yml',
                         inventory: 'inventory.ini',
-                        extras: "-e 'ansible_ssh_user=ec2-user -e ansible_ssh_private_key_file=~/.ssh/${AMAZON_KEY_PAIR}.pem'"
+                        extras: "-e 'ansible_ssh_user=ec2-user -e ansible_ssh_private_key_file=~/.ssh/${AMAZON_KEY_PAIR}'"
                     )
 
                     ansiblePlaybook(
                         playbook: 'ubuntu-playbook.yml',
                         inventory: 'inventory.ini',
-                        extras: "-e 'ansible_ssh_user=ubuntu -e ansible_ssh_private_key_file=~/.ssh/${UBUNTU_KEY_PAIR}.pem'"
+                        extras: "-e 'ansible_ssh_user=ubuntu -e ansible_ssh_private_key_file=~/.ssh/${UBUNTU_KEY_PAIR}'"
                     )
                 }
             }
