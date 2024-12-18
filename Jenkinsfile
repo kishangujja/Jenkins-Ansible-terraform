@@ -2,6 +2,9 @@ pipeline {
     agent any
 
     environment {
+        AWS_ACCESS_KEY_ID = credentials('aws')  // ID from Jenkins credentials store
+        AWS_SECRET_ACCESS_KEY = credentials('aws')  // ID from Jenkins credentials store
+
         AWS_REGION = 'us-east-1'
         AMAZON_KEY_PAIR = 'devops'
         UBUNTU_KEY_PAIR = 'devops'
